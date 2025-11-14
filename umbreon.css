@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+body {
+
+  background-image: url("https://images.steamusercontent.com/ugc/1836917277227931118/2F98BF5B513D8F415681DBBBED0187825F21D354/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding-bottom: 60px;
+}
+
+
+header {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  text-shadow: 2px 2px 6px #000;
+  border-bottom: 2px solid #020203;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  flex: 1;
+  text-align: center;
+}
+
+
+.botao-voltar {
+  background: #000000;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(55, 16, 77, 0.6);
+}
+
+.botao-voltar:hover {
+  background: #211d23;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+}
+
+
+.container {
+  background: rgba(0, 0, 30, 0.7);
+  margin: 50px auto;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 850px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+}
+
+
+.Umbreon-img {
+  width: 260px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.info {
+  color: #ffffff;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 15px;
+  transition: transform 0.4s, box-shadow 0.4s;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.card img {
+  width: 180px;
+  border-radius: 10px;
+  transition: transform 0.4s, filter 0.4s;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(9, 8, 9, 0.8);
+}
+
+.card img:hover {
+  filter: brightness(1.3) drop-shadow(0 0 15px #000000);
+}
+
+
+.evolucoes {
+  margin-top: 50px;
+}
+
+.evo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.evo img {
+  width: 110px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  transition: transform 0.3s;
+}
+
+.evo img:hover {
+  transform: scale(1.1);
+}
+
+
+footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #ffffff;
+}

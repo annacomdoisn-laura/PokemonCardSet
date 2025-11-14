@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon TCG - Experiência Premium</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f3460 100%);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 6rem;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+      background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: titleGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from {
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      }
+
+      to {
+        text-shadow: 0 0 40px rgba(255, 215, 0, 1);
+      }
+    }
+
+    .pack-scene {
+      position: relative;
+      width: 320px;
+      height: 450px;
+      margin: 0 auto 2rem;
+      cursor: grab;
+    }
+
+    .pack-scene:active {
+      cursor: grabbing;
+    }
+
+
+    .pack-complete {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.7),
+        0 8px 25px rgba(0, 0, 0, 0.4);
+      transition: opacity 0.3s ease;
+    }
+
+    .pack-complete-image {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    .pack-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 15%;
+      border-radius: 16px 16px 0 0;
+      transform-origin: bottom center;
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 3;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .pack-top-image {
+      width: 100%;
+      height: 100%;
+      object-position: top;
+    }
+
+    .pack-bottom {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      width: 100%;
+      height: 85%;
+      border-radius: 0 0 16px 16px;
+      overflow: hidden;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .pack-bottom-image {
+      width: 100%;
+      height: 100%;
+      object-position: top;
+    }
+
+
+    .tear-line {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          #00aeff 20%,
+          #00ffff 50%,
+          #00aeff 80%,
+          transparent 100%);
+      transform: translateY(-50%);
+      border-radius: 2px;
+      opacity: 0.9;
+      box-shadow:
+        0 0 20px rgba(0, 174, 255, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      z-index: 4;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .tear-line.pulsing {
+      animation: bluePulse 1.5s infinite;
+    }
+
+    @keyframes bluePulse {
+
+      0%,
+      100% {
+        opacity: 0.8;
+        box-shadow: 0 0 15px rgba(0, 174, 255, 0.6);
+      }
+
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(0, 174, 255, 1);
+      }
+    }
+
+    .tear-line.hidden {
+      opacity: 0;
+      transform: translateY(-50%) scaleX(0);
+    }
+
+
+    .tear-glow {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--x) var(--y),
+          rgba(0, 174, 255, 0.3) 0%,
+          transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 3;
+      transition: opacity 0.2s ease;
+    }
+
+    .tear-glow.active {
+      opacity: 1;
+    }
+
+
+    .tear-paper-effect {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1),
+          transparent);
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-50%);
+      transition: opacity 0.3s ease;
+    }
+
+    .tear-paper-effect.active {
+      opacity: 0.7;
+    }
+
+
+    .cards-inside {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      width: 85%;
+      height: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .card-stack {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .pack-card {
+      width: 92%;
+      height: 18%;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      border-radius: 6px;
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cards-inside.visible {
+      opacity: 1;
+    }
+
+    .instruction {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      transition: all 0.3s ease;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .instruction.highlight {
+      opacity: 1;
+      color: #00aeff;
+      transform: translateY(-5px);
+      text-shadow: 0 0 20px rgba(0, 174, 255, 0.8);
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 30px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 50;
+    }
+
+    .control-btn {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(212, 175, 55, 0.9));
+      border: none;
+      color: #2c5aa0;
+      padding: 14px 28px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow:
+        0 8px 25px rgba(255, 215, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .control-btn:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 35px rgba(255, 215, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .control-btn.hidden {
+      display: none;
+    }
+
+    .card-reveal-scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .card-reveal-scene.active {
+      opacity: 1;
+    }
+
+    .revealing-card {
+      position: absolute;
+      width: 200px;
+      height: 280px;
+      transform-style: preserve-3d;
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card-reveal-front,
+    .card-reveal-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 8px 20px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+    }
+
+    .card-reveal-front {
+      background: white;
+      transform: rotateY(0deg);
+    }
+
+    .card-reveal-back {
+      background: #1a1a2e;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card-back-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .cards-final-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      padding: 50px;
+      background: rgba(10, 10, 26, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+      overflow-y: auto;
+    }
+
+    .cards-final-container.show {
+      display: flex;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .final-card {
+      width: 220px;
+      height: 308px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      border-radius: 14px;
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.7),
+        0 10px 25px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      animation: cardFinalReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+    }
+
+    @keyframes cardFinalReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(100px) rotateY(90deg) scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateY(0) scale(1);
+      }
+    }
+
+    .final-card:hover {
+      transform: translateY(-15px) rotateY(8deg) scale(1.05);
+      box-shadow:
+        0 35px 70px rgba(0, 0, 0, 0.8),
+        0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .final-card-front,
+    .final-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .final-card-front {
+      background: white;
+    }
+
+    .final-card-back {
+      background: #1a1a2e;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .rarity-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+      z-index: 2;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .common {
+      background: linear-gradient(135deg, #b0b0b0, #909090);
+      color: #333;
+    }
+
+    .uncommon {
+      background: linear-gradient(135deg, #4caf50, #45a049);
+      color: white;
+    }
+
+    .rare {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+      color: white;
+    }
+
+    .holo {
+      background: linear-gradient(135deg, #ff9800, #f57c00);
+      color: white;
+    }
+
+    .ultra-rare {
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+      color: white;
+    }
+
+    .secret-rare {
+      background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+      color: white;
+    }
+
+    .close-cards {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 51;
+      display: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .close-cards.show {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .close-cards:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: rotate(90deg) scale(1.1);
+    }
+
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float 8s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles"></div>
+
+  <div class="container">
+    <h1 class="title">POKÉMON BOOSTER OPENING</h1>
+
+    <div class="pack-scene" id="packScene">
+
+      <div class="pack-complete" id="packComplete">
+        <img src="package-complete.jpg" class="pack-complete-image" alt="Pacote Pokémon Completo">
+      </div>
+
+
+      <div class="pack-top" id="packTop">
+        <img src="package-top.jpeg" class="pack-top-image" alt="Topo do Pacote Pokémon">
+      </div>
+
+
+      <div class="pack-bottom" id="packBottom">
+        <img src="package-bottom.jpeg" class="pack-bottom-image" alt="Base do Pacote Pokémon">
+      </div>
+
+
+      <div class="cards-inside" id="cardsInside">
+        <div class="card-stack">
+          <div class="pack-card"></div>
+          <div class="pack-card"></div>
+          <div class="pack-card"></div>
+          <div class="pack-card"></div>
+          <div class="pack-card"></div>
+        </div>
+      </div>
+
+
+      <div class="tear-line pulsing" id="tearLine"></div>
+      <div class="tear-glow" id="tearGlow"></div>
+      <div class="tear-paper-effect" id="tearPaperEffect"></div>
+    </div>
+
+    <div class="instruction" id="instruction">
+      Clique e arraste da esquerda para direita na linha azul
+    </div>
+  </div>
+
+  <div class="card-reveal-scene" id="cardRevealScene"></div>
+
+  >
+  <div class="cards-final-container" id="cardsFinalContainer"></div>
+
+  <button class="close-cards" id="closeCards">✕</button>
+
+  <div class="controls">
+    <button class="control-btn hidden" id="newPackBtn">Abrir Outro Pacote</button>
+  </div>
+
+  <script>
+
+    const packScene = document.getElementById('packScene');
+    const packComplete = document.getElementById('packComplete');
+    const packTop = document.getElementById('packTop');
+    const packBottom = document.getElementById('packBottom');
+    const cardsInside = document.getElementById('cardsInside');
+    const tearLine = document.getElementById('tearLine');
+    const tearGlow = document.getElementById('tearGlow');
+    const tearPaperEffect = document.getElementById('tearPaperEffect');
+    const cardRevealScene = document.getElementById('cardRevealScene');
+    const cardsFinalContainer = document.getElementById('cardsFinalContainer');
+    const instruction = document.getElementById('instruction');
+    const newPackBtn = document.getElementById('newPackBtn');
+    const closeCards = document.getElementById('closeCards');
+    const particlesContainer = document.getElementById('particles');
+
+
+    let isTearing = false;
+    let tearStartX = 0;
+    let tearCurrentX = 0;
+    let allCards = [];
+    let currentCards = [];
+    let packOpened = false;
+
+
+    const cardBackImage = 'https://i.pinimg.com/736x/16/01/0c/16010cdf2736934b4af6fca31dd3f159.jpg';
+
+
+    function init() {
+      loadCardDatabase();
+      createParticles();
+
+
+      packScene.addEventListener('mousedown', startTear);
+      packScene.addEventListener('mousemove', doTear);
+      packScene.addEventListener('mouseup', endTear);
+      packScene.addEventListener('mouseleave', endTear);
+
+      packScene.addEventListener('touchstart', handleTouchStart);
+      packScene.addEventListener('touchmove', handleTouchMove);
+      packScene.addEventListener('touchend', endTear);
+
+      newPackBtn.addEventListener('click', resetPack);
+      closeCards.addEventListener('click', hideFinalCards);
+    }
+
+
+    function createParticles() {
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        particle.style.animationDuration = `${8 + Math.random() * 4}s`;
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+
+    function handleTouchStart(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const mouseEvent = new MouseEvent('mousedown', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      startTear(mouseEvent);
+    }
+
+    function handleTouchMove(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const mouseEvent = new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      doTear(mouseEvent);
+    }
+
+
+    function loadCardDatabase() {
+      allCards = [
+
+        {
+          id: 'pikachu-common',
+          name: 'Pikachu',
+          image: 'https://images.pokemontcg.io/base1/25.png',
+          rarity: 'Common'
+        },
+        {
+          id: 'bulbasaur-common',
+          name: 'Bulbasaur',
+          image: 'https://images.pokemontcg.io/base1/44.png',
+          rarity: 'Common'
+        },
+        {
+          id: 'charmander-common',
+          name: 'Charmander',
+          image: 'https://images.pokemontcg.io/base1/46.png',
+          rarity: 'Common'
+        },
+        {
+          id: 'squirtle-common',
+          name: 'Squirtle',
+          image: 'https://images.pokemontcg.io/base1/63.png',
+          rarity: 'Common'
+        },
+
+
+        {
+          id: 'raichu-uncommon',
+          name: 'Raichu',
+          image: 'https://images.pokemontcg.io/base1/14.png',
+          rarity: 'Uncommon'
+        },
+        {
+          id: 'gyarados-uncommon',
+          name: 'Gyarados',
+          image: 'https://images.pokemontcg.io/base1/6.png',
+          rarity: 'Uncommon'
+        },
+
+
+        {
+          id: 'mewtwo-rare',
+          name: 'Mewtwo',
+          image: 'https://images.pokemontcg.io/base1/10.png',
+          rarity: 'Rare'
+        },
+        {
+          id: 'alakazam-rare',
+          name: 'Alakazam',
+          image: 'https://images.pokemontcg.io/base1/1.png',
+          rarity: 'Rare'
+        },
+
+
+        {
+          id: 'charizard-holo',
+          name: 'Charizard',
+          image: 'https://images.pokemontcg.io/base1/4.png',
+          rarity: 'Rare Holo'
+        },
+        {
+          id: 'blastoise-holo',
+          name: 'Blastoise',
+          image: 'https://images.pokemontcg.io/base1/2.png',
+          rarity: 'Rare Holo'
+        },
+
+
+        {
+          id: 'mew-ultra',
+          name: 'Mew',
+          image: 'https://images.pokemontcg.io/base5/55.png',
+          rarity: 'Ultra Rare'
+        },
+
+
+        {
+          id: 'charizard-secret',
+          name: 'Charizard',
+          image: 'https://images.pokemontcg.io/pl3/127.png',
+          rarity: 'Secret Rare'
+        }
+      ];
+    }
+
+
+    function startTear(e) {
+      if (packOpened) return;
+
+      e.preventDefault();
+      isTearing = true;
+      const rect = packScene.getBoundingClientRect();
+      tearStartX = e.clientX - rect.left;
+      tearCurrentX = tearStartX;
+
+      tearLine.classList.remove('pulsing');
+      instruction.classList.add('highlight');
+      instruction.textContent = "Arraste da esquerda para direita...";
+
+
+      tearPaperEffect.classList.add('active');
+
+
+      packTop.style.opacity = '1';
+      packBottom.style.opacity = '1';
+      packComplete.style.opacity = '0';
+    }
+
+
+    function doTear(e) {
+      if (!isTearing || packOpened) return;
+
+      const rect = packScene.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+
+      const tearLineY = rect.height * 0.15;
+      const distanceToLine = Math.abs(mouseY - tearLineY);
+
+
+      if (distanceToLine < 15) {
+
+        tearCurrentX = Math.max(0, Math.min(mouseX, rect.width));
+
+
+        const progress = (tearCurrentX - tearStartX) / rect.width;
+
+
+        updateTearGlow(tearCurrentX, tearLineY);
+
+
+        const liftAmount = Math.min(progress * 25, 25);
+        const translateY = Math.min(progress * -80, -80);
+        const rotateAmount = Math.min(progress * 8, 8);
+
+        packTop.style.transform = `rotateX(-${liftAmount}deg) translateY(${translateY}px) rotateZ(${rotateAmount}deg)`;
+
+
+        if (progress > 0.3) {
+          cardsInside.classList.add('visible');
+          cardsInside.style.opacity = Math.min((progress - 0.3) * 2, 1);
+        }
+
+
+        tearPaperEffect.style.opacity = Math.min(progress * 1.5, 0.7);
+
+
+        if (progress >= 0.8) {
+          completeTear();
+        }
+      }
+    }
+
+
+    function endTear() {
+      if (!isTearing) return;
+
+      const rect = packScene.getBoundingClientRect();
+      const progress = (tearCurrentX - tearStartX) / rect.width;
+
+
+      if (progress >= 0.6) {
+        completeTear();
+      } else {
+        resetTear();
+      }
+    }
+
+
+    function resetTear() {
+      isTearing = false;
+
+      tearLine.classList.add('pulsing');
+      instruction.classList.remove('highlight');
+      instruction.textContent = "Clique e arraste da esquerda para direita na linha azul";
+
+      tearGlow.classList.remove('active');
+      tearPaperEffect.classList.remove('active');
+
+
+      packTop.style.transform = 'none';
+      packTop.style.transition = 'all 0.5s ease';
+
+      setTimeout(() => {
+        packTop.style.opacity = '0';
+        packBottom.style.opacity = '0';
+
+        packComplete.style.opacity = '1';
+
+        cardsInside.classList.remove('visible');
+        cardsInside.style.opacity = '0';
+
+
+        setTimeout(() => {
+          packTop.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        }, 500);
+      }, 300);
+    }
+
+
+    function updateTearGlow(x, y) {
+      tearGlow.style.setProperty('--x', `${x}px`);
+      tearGlow.style.setProperty('--y', `${y}px`);
+      tearGlow.classList.add('active');
+    }
+
+
+    function completeTear() {
+      if (packOpened) return;
+
+      isTearing = false;
+      packOpened = true;
+
+
+      packTop.style.transform = 'rotateX(-30deg) translateY(-100px) rotateZ(10deg)';
+      packTop.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+      tearLine.classList.add('hidden');
+      tearPaperEffect.classList.remove('active');
+      instruction.classList.remove('highlight');
+      instruction.textContent = "Pacote aberto! Revelando cartas...";
+
+
+      setTimeout(() => {
+        revealCards();
+      }, 800);
+    }
+
+
+    function revealCards() {
+
+      currentCards = selectRandomCards();
+      cardRevealScene.classList.add('active');
+
+      currentCards.forEach((card, index) => {
+        setTimeout(() => {
+          createRevealingCard(card, index);
+        }, index * 400);
+      });
+
+      setTimeout(() => {
+        showFinalCards();
+        cardRevealScene.classList.remove('active');
+      }, currentCards.length * 400 + 800);
+    }
+
+
+    function selectRandomCards() {
+      const cards = [];
+
+
+      const commons = allCards.filter(card => card.rarity === 'Common');
+      const uncommons = allCards.filter(card => card.rarity === 'Uncommon');
+      const rares = allCards.filter(card =>
+        card.rarity === 'Rare' || card.rarity === 'Rare Holo' ||
+        card.rarity === 'Ultra Rare' || card.rarity === 'Secret Rare'
+      );
+
+
+      for (let i = 0; i < 3; i++) {
+        if (commons.length > 0) {
+          const randomIndex = Math.floor(Math.random() * commons.length);
+          cards.push(commons[randomIndex]);
+        }
+      }
+
+
+      if (uncommons.length > 0) {
+        const randomIndex = Math.floor(Math.random() * uncommons.length);
+        cards.push(uncommons[randomIndex]);
+      }
+
+
+      if (rares.length > 0) {
+        const randomIndex = Math.floor(Math.random() * rares.length);
+        cards.push(rares[randomIndex]);
+      }
+
+      return cards.sort(() => Math.random() - 0.5);
+    }
+
+
+    function createRevealingCard(card, index) {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'revealing-card';
+
+      const packRect = packScene.getBoundingClientRect();
+      cardElement.style.left = `${packRect.left + packRect.width / 2 - 100}px`;
+      cardElement.style.top = `${packRect.top + packRect.height * 0.6 - 140}px`;
+
+
+      const cardBack = document.createElement('div');
+      cardBack.className = 'card-reveal-back';
+
+      const backImg = new Image();
+      backImg.src = cardBackImage;
+      backImg.alt = 'Card Back';
+      backImg.className = 'card-back-image';
+      cardBack.appendChild(backImg);
+
+
+      const cardFront = document.createElement('div');
+      cardFront.className = 'card-reveal-front';
+
+      const img = new Image();
+      img.src = card.image;
+      img.alt = card.name;
+      img.className = 'card-image';
+      cardFront.appendChild(img);
+
+      cardElement.appendChild(cardBack);
+      cardElement.appendChild(cardFront);
+
+      cardRevealScene.appendChild(cardElement);
+
+
+      setTimeout(() => {
+        cardElement.style.transform = 'rotateY(180deg)';
+        cardElement.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+      }, 200);
+    }
+
+
+    function showFinalCards() {
+      cardsFinalContainer.innerHTML = '';
+      cardsFinalContainer.classList.add('show');
+      closeCards.classList.add('show');
+
+      currentCards.forEach((card, index) => {
+        createFinalCard(card, index);
+      });
+
+      newPackBtn.classList.remove('hidden');
+    }
+
+    function createFinalCard(card, index) {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'final-card';
+      cardElement.style.animationDelay = `${index * 0.1}s`;
+
+
+      const cardBack = document.createElement('div');
+      cardBack.className = 'final-card-back';
+
+      const backImg = new Image();
+      backImg.src = cardBackImage;
+      backImg.alt = 'Card Back';
+      backImg.className = 'card-back-image';
+      cardBack.appendChild(backImg);
+
+
+      const cardFront = document.createElement('div');
+      cardFront.className = 'final-card-front';
+
+      const img = new Image();
+      img.src = card.image;
+      img.alt = card.name;
+      img.className = 'card-image';
+      cardFront.appendChild(img);
+
+
+      const rarityBadge = document.createElement('div');
+      rarityBadge.className = `rarity-badge ${getRarityClass(card.rarity)}`;
+      rarityBadge.textContent = getRaritySymbol(card.rarity);
+      cardFront.appendChild(rarityBadge);
+
+      cardElement.appendChild(cardBack);
+      cardElement.appendChild(cardFront);
+
+      cardsFinalContainer.appendChild(cardElement);
+    }
+
+
+    function getRarityClass(rarity) {
+      const rarityMap = {
+        'Common': 'common',
+        'Uncommon': 'uncommon',
+        'Rare': 'rare',
+        'Rare Holo': 'holo',
+        'Ultra Rare': 'ultra-rare',
+        'Secret Rare': 'secret-rare'
+      };
+      return rarityMap[rarity] || 'common';
+    }
+
+
+    function getRaritySymbol(rarity) {
+      const symbolMap = {
+        'Common': 'C',
+        'Uncommon': 'U',
+        'Rare': 'R',
+        'Rare Holo': 'H',
+        'Ultra Rare': 'UR',
+        'Secret Rare': 'SR'
+      };
+      return symbolMap[rarity] || 'C';
+    }
+
+
+    function hideFinalCards() {
+      cardsFinalContainer.classList.remove('show');
+      closeCards.classList.remove('show');
+      newPackBtn.classList.add('hidden');
+      resetPack();
+    }
+
+
+    function resetPack() {
+      isTearing = false;
+      packOpened = false;
+      tearStartX = 0;
+      tearCurrentX = 0;
+
+      packTop.style.opacity = '0';
+      packBottom.style.opacity = '0';
+      packComplete.style.opacity = '1';
+      packTop.style.transform = 'none';
+
+      cardsInside.classList.remove('visible');
+      cardsInside.style.opacity = '0';
+
+      tearLine.classList.remove('hidden');
+      tearLine.classList.add('pulsing');
+
+      instruction.textContent = "Clique e arraste da esquerda para direita na linha azul";
+      instruction.classList.remove('highlight');
+
+      cardRevealScene.innerHTML = '';
+      cardRevealScene.classList.remove('active');
+      cardsFinalContainer.innerHTML = '';
+      cardsFinalContainer.classList.remove('show');
+    }
+
+    window.addEventListener('load', init);
+    document.addEventListener('dragstart', (e) => {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  </script>
+</body>
+
+</html>

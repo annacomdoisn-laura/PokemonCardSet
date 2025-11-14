@@ -1,0 +1,137 @@
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Trebuchet MS', sans-serif;
+}
+
+body {
+background-image: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjcK2MJ4_Todndzpzsm89MbHHfxBLfLQXIijJxChyaKi_uMBkPqgngmBX5kj57ii7gM2p7R8K4EUxW0PTYj_IVd8Vi3b-v-F1wirbpI7RqN1cyHY4A3jqg8mQZ4UrD8_Zdl7d8FkV_Z8GB/s1600/e24.gif");
+background-size: cover;
+background-attachment: fixed;
+background-position: center;
+color: white;
+text-align: center;
+padding-bottom: 60px;
+}
+
+header {
+background-color: rgba(0, 120, 40, 0.8);
+padding: 20px;
+text-shadow: 2px 2px 6px #000;
+border-bottom: 2px solid #5aff8d;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+header h1 {
+flex: 1;
+text-align: center;
+}
+
+.botao-voltar {
+background: #27ae60;
+color: white;
+text-decoration: none;
+padding: 10px 20px;
+border-radius: 10px;
+font-weight: bold;
+transition: 0.3s;
+box-shadow: 0 0 15px rgba(0, 255, 150, 0.5);
+}
+
+.botao-voltar:hover {
+background: #2ecc71;
+transform: scale(1.05);
+box-shadow: 0 0 25px rgba(120, 255, 180, 0.9);
+}
+
+.container {
+background: rgba(0, 40, 20, 0.75);
+margin: 50px auto;
+border-radius: 20px;
+padding: 30px;
+max-width: 850px;
+box-shadow: 0 0 25px rgba(0, 255, 100, 0.6);
+}
+
+.venosaur-img {
+width: 260px;
+animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+0% { transform: translateY(0); }
+50% { transform: translateY(-10px); }
+100% { transform: translateY(0); }
+}
+
+.info {
+color: #d0ffd6;
+line-height: 1.6;
+font-size: 1.1rem;
+margin-top: 15px;
+}
+
+.cards-container {
+display: flex;
+justify-content: center;
+gap: 30px;
+flex-wrap: wrap;
+margin-top: 30px;
+}
+
+.card {
+background: rgba(255, 255, 255, 0.1);
+border-radius: 15px;
+padding: 15px;
+transition: transform 0.4s, box-shadow 0.4s;
+box-shadow: 0 0 15px rgba(0, 255, 120, 0.3);
+backdrop-filter: blur(5px);
+}
+
+.card img {
+width: 180px;
+border-radius: 10px;
+transition: transform 0.4s, filter 0.4s;
+}
+
+.card:hover {
+transform: scale(1.1);
+box-shadow: 0 0 25px rgba(100, 255, 150, 0.8);
+}
+
+.card img:hover {
+filter: brightness(1.2) drop-shadow(0 0 15px #33ff99);
+}
+
+.evolucoes {
+margin-top: 50px;
+}
+
+.evo-container {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 15px;
+margin-top: 15px;
+}
+
+.evo img {
+width: 110px;
+border-radius: 10px;
+background: rgba(255, 255, 255, 0.2);
+padding: 10px;
+transition: transform 0.3s;
+}
+
+.evo img:hover {
+transform: scale(1.1);
+}
+
+footer {
+margin-top: 40px;
+font-size: 0.9rem;
+color: #66ff99;
+}

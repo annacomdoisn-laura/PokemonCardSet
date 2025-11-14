@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: url('https://i.pinimg.com/originals/8c/95/0c/8c950c97a9a1cc4c3b91e595616ad852.gif') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container do login */
+.login-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    color: #fff;
+}
+
+.login-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.login-container p {
+    color: #ddd;
+    margin-bottom: 25px;
+}
+
+/* Formulário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form label {
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.login-form input {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.login-form input::placeholder {
+    color: #ccc;
+}
+
+.login-form input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Botão */
+.login-form button {
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#botao {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #00b4d8;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+#botao:hover {
+    background: #0096c7;
+    transform: scale(1.05);
+}
+
+
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 25px;
+    }
+
+    .login-container h1 {
+        font-size: 1.6rem;
+    }
+}

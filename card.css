@@ -1,0 +1,531 @@
+:root {
+  --color1: rgb(0, 38, 255);
+  --color2: rgb(84, 110, 255);
+  --back: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4f7705ec-8c49-4eed-a56e-c21f3985254c/dah43cy-a8e121cb-934a-40f6-97c7-fa2d77130dd5.png/v1/fill/w_1024,h_1420/pokemon_card_backside_in_high_resolution_by_atomicmonkeytcg_dah43cy-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTQyMCIsInBhdGgiOiIvZi80Zjc3MDVlYy04YzQ5LTRlZWQtYTU2ZS1jMjFmMzk4NTI1NGMvZGFoNDNjeS1hOGUxMjFjYi05MzRhLTQwZjYtOTdjNy1mYTJkNzcxMzBkZDUucG5nIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.364HskpTM11MwvEzmMXHqIkEbcA318yjhAaLQ9LsH0E);
+  --charizard1: #fac;
+  --charizard2: #ddccaa;
+  --charizardfront: url(https://assets.codepen.io/13471/charizard-gx.webp);
+  --pika1: #54a29e;
+  --pika2: #a79d66;
+  --pikafront: url(https://assets.codepen.io/13471/pikachu-gx.webp);
+  --eevee1: #efb2fb;
+  --eevee2: #acc6f8;
+  --eeveefront: url(https://assets.codepen.io/13471/eevee-gx.webp);
+  --mewtwo1: #efb2fb;
+  --mewtwo2: #acc6f8;
+  --mewtwofront: url(https://assets.codepen.io/13471/mewtwo-gx.webp);
+  --gengarmimikyu1: #ece1a4;
+  --gengarmimikyu2: #896cf5;
+  --gengarmimikyufront: url(https://hobbylark.com/.image/w_3840,q_auto:good,c_limit/MTk2OTcwMzcwNjg1OTM3NDEz/pokmon-tcg-5-of-the-rarest-and-most-valuable-gengar-cards.png);
+  --latioslatias1: #2390f7;
+  --latioslatias2: #f83838;
+  --latioslatiasfront: url(https://i.pinimg.com/736x/c3/10/67/c31067f263a33b6fc1fa392e69376720.jpg);
+  --pheromosabuzzwole1: #fff;
+  --pheromosabuzzwole2: #fff;
+  --pheromosabuzzwolefront: url(https://i.pinimg.com/736x/0a/cf/d4/0acfd4f79ae65b9e0e21647d6a127447.jpg);
+  --greninjazoroark1: #2c5ebd;
+  --greninjazoroark2: #752626;
+  --greninjazoroarkfront: url(https://i.pinimg.com/736x/a3/e7/e0/a3e7e0b4c3ede79603a8a0efd86b82af.jpg);
+  --snorlaxeevee1: #0c5551;
+  --snorlaxeevee2: #c7ad7e;
+  --snorlaxeeveefront: url(https://i.pinimg.com/736x/fd/30/ff/fd30ffb6a09de0308c2ac685eab31096.jpg);
+  --articunotrio1: #ec5b5b;
+  --articunotrio2: #48c46d;
+  --articunotriofront: url(https://i.pinimg.com/736x/a6/01/ab/a601ab865e36c53bb0a1f3e1317c0df0.jpg);
+  --togepitrio1: #f8b4b4;
+  --togepitrio2: #f7f0b1;
+  --togepitriofront: url(https://i.pinimg.com/736x/b0/f7/a1/b0f7a1760ce9bec8ea351ef2852a5496.jpg);
+  --flareon1: #ff572d;
+  --flareon2: #ff9853;
+  --flareonfront: url(https://i.pinimg.com/736x/fd/54/9b/fd549b4d7aa394bcad4ec4d859bf31c2.jpg);
+  --jolteon1: #fdf186ee;
+  --jolteon2: #fcd861;
+  --jolteonfront: url(https://i.pinimg.com/736x/0e/37/88/0e3788c3a1514afdc2c7cd260a4e7a44.jpg);
+  --leafeon1: #d5fa8f;
+  --leafeon2: #98f74a;
+  --leafeonfront: url(https://i.pinimg.com/736x/0f/c0/0d/0fc00d138bcf0f452ff66e84e80f1cd8.jpg);
+  --sylveon1: #ff74aeee;
+  --sylveon2: #80e5ff;
+  --sylveonfront: url(https://www.brickheadscollectables.com/cdn/shop/files/156_hires_63ccd568-30e4-49b6-ac75-bdd3be91a02a.png?v=1737271952);
+  --glaceon1: #78f6ff;
+  --glaceon2: #73d0fc;
+  --glaceonfront: url(https://i.pinimg.com/736x/e2/85/7c/e2857cd20518b6c8658f1d331739f76f.jpg);
+  --vaporeon1: #82c4fa;
+  --vaporeon2: #3681d6;
+  --vaporeonfront: url(https://i.pinimg.com/1200x/bc/af/d0/bcafd08c086010d25b63c3c02e8e6b53.jpg);
+  --espeon1: #e1a5fd;
+  --espeon2: #d1b7fc;
+  --espeonfront: url(https://i.pinimg.com/736x/9c/62/02/9c62028684b6814d722aa2107b867f2b.jpg);
+  --umbreon1: #212bb3;
+  --umbreon2: #672df0;
+  --umbreonfront: url(https://i.pinimg.com/736x/e8/2c/fb/e82cfbe8c340564e158c0b8a0efdd521.jpg);
+  --dachsbun1: #ecba77;
+  --dachsbun2: #f5ad72;
+  --dachsbunfront: url(https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV07/SV07_EN_169.png);
+  --reuniclus1: #90ff6e;
+  --reuniclus2: #a8dfff;
+  --reuniclusfront: url(https://i.pinimg.com/736x/53/7b/21/537b21da81632b2d09fb0d914db93313.jpg);
+  --mantyke1: #acdaff;
+  --mantyke2: #85b6ff;
+  --mantykefront: url(https://i.pinimg.com/736x/39/17/7d/39177d63c396dd23e520bda0a3baa80f.jpg);
+  --tinkatink1: #ff89c4;
+  --tinkatink2: #b9a6ff;
+  --tinkatink3: #9dfffa;
+  --tinkatinkfront: url(https://i.pinimg.com/736x/83/66/14/8366149e4abcdd99c2abc1e0c787a75b.jpg);
+  --cresselia1: #718bff;
+  --cresselia2: #6a5fff;
+  --cresseliafront: url(https://i.pinimg.com/736x/18/22/5c/18225c46263ef66c4bd9b29f1a60e41f.jpg);
+  --gothorita1: #433592;
+  --gothorita2: #ce8cfa;
+  --gothoritafront: url(https://i.pinimg.com/1200x/77/60/07/776007873877d8313a082ebccbd0c588.jpg);
+  --pikachuvangogh1: #203ec5;
+  --pikachuvangogh2: #edf039;
+  --pikachuvangoghfront: url(https://i.pinimg.com/736x/77/0e/a6/770ea6b6665e27bbf1805659b96efe96.jpg);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #333844;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 80px 20px 100px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.card-wrapper {
+  width: 280px;
+  height: 390px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  perspective: 1000px;
+  flex-shrink: 0;
+  /* Impede que as cartas encolham */
+}
+
+.card-wrapper.flipped {
+  transform: rotateY(180deg);
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5% / 3.5%;
+  backface-visibility: hidden;
+  overflow: hidden;
+
+  box-shadow: -5px -5px 5px -5px var(--color1),
+    5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent,
+    7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255, 255, 255, 0),
+    0 55px 35px -20px rgba(0, 0, 0, 0.5);
+
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  will-change: transform, filter;
+
+  background-color: #040712;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+.card:hover {
+  box-shadow: -20px -20px 30px -25px var(--color1),
+    20px 20px 30px -25px var(--color2),
+    -7px -7px 10px -5px var(--color1),
+    7px 7px 10px -5px var(--color2),
+    0 0 13px 4px rgba(255, 255, 255, 0.3),
+    0 55px 35px -20px rgba(0, 0, 0, 0.5);
+}
+
+.card-front {
+  background-image: var(--front);
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  background-image: var(--back);
+  transform: rotateY(180deg);
+}
+
+.card.charizard {
+  --color1: var(--charizard1);
+  --color2: var(--charizard2);
+  --front: var(--charizardfront);
+}
+
+.card.pika {
+  --color1: var(--pika1);
+  --color2: var(--pika2);
+  --front: var(--pikafront);
+}
+
+.card.mewtwo {
+  --color1: var(--mewtwo1);
+  --color2: var(--mewtwo2);
+  --front: var(--mewtwofront);
+}
+
+.card.flareon {
+  --color1: var(--flareon1);
+  --color2: var(--flareon2);
+  --front: var(--flareonfront);
+}
+
+.card.jolteon {
+  --color1: var(--jolteon1);
+  --color2: var(--jolteon2);
+  --front: var(--jolteonfront);
+}
+
+.card.leafeon {
+  --color1: var(--leafeon1);
+  --color2: var(--leafeon2);
+  --front: var(--leafeonfront);
+}
+
+.card.sylveon {
+  --color1: var(--sylveon1);
+  --color2: var(--sylveon2);
+  --front: var(--sylveonfront);
+}
+
+.card.glaceon {
+  --color1: var(--glaceon1);
+  --color2: var(--glaceon2);
+  --front: var(--glaceonfront);
+}
+
+.card.vaporeon {
+  --color1: var(--vaporeon1);
+  --color2: var(--vaporeon2);
+  --front: var(--vaporeonfront);
+}
+
+.card.espeon {
+  --color1: var(--espeon1);
+  --color2: var(--espeon2);
+  --front: var(--espeonfront);
+}
+
+.card.umbreon {
+  --color1: var(--umbreon1);
+  --color2: var(--umbreon2);
+  --front: var(--umbreonfront);
+}
+
+.card.eevee {
+  --color1: #ec9bb6;
+  --color2: #ccac6f;
+  --color3: #69e4a5;
+  --color4: #8ec5d6;
+  --color5: #b98cce;
+  --front: var(--eeveefront);
+}
+
+.card.gengarmimikyu {
+  --color1: var(--gengarmimikyu1);
+  --color2: var(--gengarmimikyu2);
+  --front: var(--gengarmimikyufront);
+}
+
+.card.latioslatias {
+  --color1: var(--latioslatias1);
+  --color2: var(--latioslatias2);
+  --front: var(--latioslatiasfront);
+}
+
+.card.greninjazoroark {
+  --color1: var(--greninjazoroark1);
+  --color2: var(--greninjazoroark2);
+  --front: var(--greninjazoroarkfront);
+}
+
+.card.snorlaxeevee {
+  --color1: var(--snorlaxeevee1);
+  --color2: var(--snorlaxeevee2);
+  --front: var(--snorlaxeeveefront);
+}
+
+.card.articunotrio {
+  --color1: var(--articunotrio1);
+  --color2: var(--articunotrio2);
+  --front: var(--articunotriofront);
+}
+
+.card.togepitrio {
+  --color1: var(--togepitrio1);
+  --color2: var(--togepitrio2);
+  --front: var(--togepitriofront);
+}
+
+.card.dachsbun {
+  --color1: var(--dachsbun1);
+  --color2: var(--dachsbun2);
+  --front: var(--dachsbunfront);
+}
+
+.card.reuniclus {
+  --color1: var(--reuniclus1);
+  --color2: var(--reuniclus2);
+  --front: var(--reuniclusfront);
+}
+
+.card.mantyke {
+  --color1: var(--mantyke1);
+  --color2: var(--mantyke2);
+  --front: var(--mantykefront);
+}
+
+.card.tinkatink {
+  --color1: var(--tinkatink1);
+  --color2: var(--tinkatink2);
+  --color3: var(--tinkatink3);
+  --front: var(--tinkatinkfront);
+}
+
+.card.cresselia {
+  --color1: var(--cresselia1);
+  --color2: var(--cresselia2);
+  --front: var(--cresseliafront);
+}
+
+.card.gothorita {
+  --color1: var(--gothorita1);
+  --color2: var(--gothorita2);
+  --front: var(--gothoritafront);
+}
+
+.card.pikachuvangogh {
+  --color1: var(--pikachuvangogh1);
+  --color2: var(--pikachuvangogh2);
+  --front: var(--pikachuvangoghfront);
+}
+
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: .5;
+  mix-blend-mode: color-dodge;
+  transition: all .33s ease;
+}
+
+.card:before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(115deg,
+      transparent 0%,
+      var(--color1) 25%,
+      transparent 47%,
+      transparent 53%,
+      var(--color2) 25%,
+      transparent 100%);
+  opacity: .5;
+  filter: brightness(.5) contrast(1);
+  z-index: 1;
+}
+
+.card:after {
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+    url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
+  background-position: 50% 50%;
+  background-size: 160%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  transition: all .33s ease;
+  mix-blend-mode: color-dodge;
+  opacity: .75;
+}
+
+.card.active:after,
+.card:hover:after {
+  filter: brightness(1) contrast(1);
+  opacity: 1;
+}
+
+.card.active,
+.card:hover {
+  animation: none;
+  transition: box-shadow 0.1s ease-out;
+}
+
+.card.active:before,
+.card:hover:before {
+  animation: none;
+  background-image: linear-gradient(110deg,
+      transparent 25%,
+      var(--color1) 48%,
+      var(--color2) 52%,
+      transparent 75%);
+  background-position: 50% 50%;
+  background-size: 250% 250%;
+  opacity: .88;
+  filter: brightness(.66) contrast(1.33);
+  transition: none;
+}
+
+.card.animated {
+  transition: none;
+  animation: holoCard 12s ease 0s 1;
+}
+
+.card.animated:before {
+  transition: none;
+  animation: holoGradient 12s ease 0s 1;
+}
+
+.card.animated:after {
+  transition: none;
+  animation: holoSparkle 12s ease 0s 1;
+}
+
+@keyframes holoCard {
+
+  0%,
+  100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+
+  5%,
+  8% {
+    transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+  }
+
+  13%,
+  16% {
+    transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+  }
+
+  35%,
+  38% {
+    transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+  }
+
+  55% {
+    transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+  }
+}
+
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcb05;
+  text-shadow: 3px 3px 0 #2a75bb;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.instructions {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  width: auto;
+  white-space: nowrap;
+}
+
+.shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 20%,
+      transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.card-wrapper:hover .shine {
+  opacity: 1;
+}
+
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-wrapper {
+    width: 250px;
+    height: 350px;
+  }
+
+  .container {
+    gap: 20px;
+    padding: 70px 15px 90px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-wrapper {
+    width: 220px;
+    height: 308px;
+  }
+
+  .container {
+    gap: 15px;
+    padding: 60px 10px 80px 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+    left: 10px;
+    top: 10px;
+  }
+
+  .instructions {
+    font-size: 14px;
+    bottom: 10px;
+  }
+}

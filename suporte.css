@@ -1,0 +1,113 @@
+* {
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(https://i.redd.it/bff0ix3o1tfa1.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 25px 0;
+    text-align: center;
+    color: #fffdfd;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #98cf8a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.container {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 60px;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+
+h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 2.0rem;
+}
+
+p {
+    margin-bottom: 25px;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input,
+textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(143, 135, 135, 0.3);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+button {
+    background: #00b4d8;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0096c7;
+    transform: scale(1.08);
+}
+
+.pokeball {
+    width: 70px;
+    margin-top: 25px;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
